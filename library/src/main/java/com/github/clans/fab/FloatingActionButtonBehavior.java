@@ -6,6 +6,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.support.v4.view.ViewCompat;
 
 
 public class FloatingActionButtonBehavior extends CoordinatorLayout.Behavior<FloatingActionButton> {
@@ -36,17 +37,17 @@ public class FloatingActionButtonBehavior extends CoordinatorLayout.Behavior<Flo
 
         float translationY;
         if (dependency instanceof Snackbar.SnackbarLayout) {
-            translationY = Math.min(0, dependency.getTranslationY() - dependency.getHeight());
+            translationY = Math.min(0, ViewCompat.getTranslationY(dependency) - dependency.getHeight());
         } else {
             CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fab
                     .getLayoutParams();
             int famBottomMargin = lp.bottomMargin;
             int height = fab.getHeight();
             int distanceToScroll = height + famBottomMargin;
-            float ratio = (float) dependency.getY() / (float) mToolbarHeight;
+            float ratio = (float) ViewCompat.getY(dependency) / (float) mToolbarHeight;
             translationY = - distanceToScroll * ratio;
         }
-        fab.setTranslationY(translationY);
+        ViewCompat.setTranslationY(fab, translationY);
 
         return true;
     }
