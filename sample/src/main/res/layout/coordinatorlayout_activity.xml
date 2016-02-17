@@ -45,23 +45,81 @@
                 android:fitsSystemWindows="true">
 
             <com.github.clans.fab.FloatingActionButton
-                    android:id="@+id/fab1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star" />
+                android:id="@+id/fab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star" />
 
             <com.github.clans.fab.FloatingActionButton
-                    android:id="@+id/fab2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star" />
+                android:id="@+id/fab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star" />
 
             <com.github.clans.fab.FloatingActionButton
-                    android:id="@+id/fab3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star" />
+                android:id="@+id/fab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star" />
 
         </com.github.clans.fab.FloatingActionMenu>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/faba"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_anchor="@id/toolbar"
+            app:layout_anchorGravity="bottom|right|end"
+            android:src="@drawable/ic_star"
+            android:clickable="true"
+            android:tag="android.support.design.widget.FloatingActionButton" />
+            <!--app:layout_anchor="@id/toolbar"   // so it doens't disappear. FloatingActionButton.Behavior looks for an achor_id match with instanceof AppBarLayout -->
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabb"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="60dp"
+            app:layout_anchor="@id/toolbar"
+            app:layout_anchorGravity="bottom|right|end"
+            android:src="@drawable/ic_star"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:tag="com.github.clans.fab.FloatingActionButton"/>
+            <!--android:elevation="4dp"  // to bring it to the front. Was being hiden behing appbar -->
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fabc"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="120dp"
+            app:layout_anchor="@id/toolbar"
+            app:layout_anchorGravity="bottom|right|end"
+            app:menu_icon="@drawable/ic_star"
+            android:clickable="true"
+            app:menu_openDirection="down"
+            android:elevation="4dp"
+            android:tag="com.github.clans.fab.FloatingActionMenu" >
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="com.github.clans.fab.FloatingActionButton"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="com.github.clans.fab.FloatingActionButton"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="com.github.clans.fab.FloatingActionButton"/>
+
+        </com.github.clans.fab.FloatingActionMenu>
+
 
 </android.support.design.widget.CoordinatorLayout>

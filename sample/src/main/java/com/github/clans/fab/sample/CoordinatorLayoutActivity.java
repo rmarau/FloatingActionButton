@@ -27,6 +27,19 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
         findViewById(R.id.fab2).setOnClickListener(this);
         findViewById(R.id.fab3).setOnClickListener(this);
 
+        View.OnClickListener clickListener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, R.string.lorem_ipsum, Snackbar.LENGTH_SHORT).show();
+            }
+        };
+        findViewById(R.id.faba).setOnClickListener(clickListener);
+        findViewById(R.id.fabb).setOnClickListener(clickListener);
+        findViewById(R.id.fabc).setOnClickListener(clickListener);
+        findViewById(R.id.fabd).setOnClickListener(clickListener);
+        findViewById(R.id.fabe).setOnClickListener(clickListener);
+        findViewById(R.id.fabf).setOnClickListener(clickListener);
+
         Locale[] availableLocales = Locale.getAvailableLocales();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
