@@ -27,8 +27,61 @@ public class FloatingActionButtonBehavior extends CoordinatorLayout.Behavior<Flo
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionButton fab, View dependency) {
-        super.onDependentViewChanged(parent, fab, dependency);
+    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionButton child,
+                                          View dependency) {
+        if (dependency instanceof Snackbar.SnackbarLayout) {
+            return updateFabTranslationForSnackbar(parent, child, dependency);
+        } else if (dependency instanceof AppBarLayout) {
+            // If we're depending on an AppBarLayout we will show/hide it automatically
+            // if the FAB is anchored to the AppBarLayout
+            return updateFabVisibility(parent, (AppBarLayout) dependency, child);
+        }
+        return false;
+    }
+
+    private boolean updateFabTranslationForSnackbar(CoordinatorLayout parent,
+                                                 final FloatingActionButton fab, View snackbar) {
+        if (fab.getVisibility() != View.VISIBLE) {
+            return false;
+        }
+
+        if (mToolbarHeight == -1) {
+            mToolbarHeight = Util.getToolbarHeight(fab.getContext());
+        }
+
+        final CoordinatorLayout.LayoutParams lp =
+                (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+
+        if (lp.getAnchorId() != -1) {
+            return false;
+        }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            float translationY;
+            translationY = Math.min(0, snackbar.getTranslationY() - snackbar.getHeight());
+            fab.setTranslationY(translationY);
+        }else{
+            if (snackbar.getTop()<0.0)
+                fab.hide(true);
+            else
+                fab.show(true);
+        }
+
+        return true;
+    }
+
+    private boolean updateFabVisibility(CoordinatorLayout parent,
+                                        AppBarLayout appBarLayout, FloatingActionButton fab) {
+
+        final CoordinatorLayout.LayoutParams lp =
+                (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
+
+        if (lp.getAnchorId() != appBarLayout.getId()) {
+            // The anchor ID doesn't match the dependency, so we won't automatically
+            // show/hide the FAB
+            return false;
+        }
 
         if (mToolbarHeight == -1) {
             mToolbarHeight = Util.getToolbarHeight(fab.getContext());
@@ -36,20 +89,15 @@ public class FloatingActionButtonBehavior extends CoordinatorLayout.Behavior<Flo
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             float translationY;
-            if (dependency instanceof Snackbar.SnackbarLayout) {
-                translationY = Math.min(0, dependency.getTranslationY() - dependency.getHeight());
-            } else {
-                CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fab
-                        .getLayoutParams();
-                int famBottomMargin = lp.bottomMargin;
-                int height = fab.getHeight();
-                int distanceToScroll = height + famBottomMargin;
-                float ratio = dependency.getY() / (float) mToolbarHeight;
-                translationY = -distanceToScroll * ratio;
-            }
+            int famBottomMargin = lp.bottomMargin;
+            int height = fab.getHeight();
+            int distanceToScroll = height + famBottomMargin;
+            float ratio = appBarLayout.getY() / (float) mToolbarHeight;
+            translationY = -distanceToScroll * ratio;
+
             fab.setTranslationY(translationY);
         }else{
-            if (dependency.getTop()<0.0)
+            if (appBarLayout.getTop()<0.0)
                 fab.hide(true);
             else
                 fab.show(true);

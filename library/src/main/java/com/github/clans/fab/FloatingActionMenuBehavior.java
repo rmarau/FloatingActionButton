@@ -1,13 +1,11 @@
 package com.github.clans.fab;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 
@@ -30,8 +28,60 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionMenu fam, View dependency) {
-        super.onDependentViewChanged(parent, fam, dependency);
+    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionMenu child,
+                                          View dependency) {
+        if (dependency instanceof Snackbar.SnackbarLayout) {
+            return updateFabTranslationForSnackbar(parent, child, dependency);
+        } else if (dependency instanceof AppBarLayout) {
+            // If we're depending on an AppBarLayout we will show/hide it automatically
+            // if the FAB is anchored to the AppBarLayout
+            return updateFabVisibility(parent, (AppBarLayout) dependency, child);
+        }
+        return false;
+    }
+
+    private boolean updateFabTranslationForSnackbar(CoordinatorLayout parent,
+                                                    final FloatingActionMenu fam, View snackbar) {
+        if (fam.getVisibility() != View.VISIBLE) {
+            return false;
+        }
+
+        if (mToolbarHeight == -1) {
+            mToolbarHeight = Util.getToolbarHeight(fam.getContext());
+        }
+
+        final CoordinatorLayout.LayoutParams lp =
+                (CoordinatorLayout.LayoutParams) fam.getLayoutParams();
+
+        if (lp.getAnchorId() != -1) {
+            return false;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            float translationY;
+            translationY = Math.min(0, snackbar.getTranslationY() - snackbar.getHeight());
+            fam.setTranslationY(translationY);
+        }else{
+            if (snackbar.getTop()<0.0)
+                fam.hideMenuButton(true);
+            else
+                fam.showMenuButton(true);
+        }
+
+        return true;
+    }
+
+    private boolean updateFabVisibility(CoordinatorLayout parent,
+                                        AppBarLayout appBarLayout, FloatingActionMenu fam) {
+
+        final CoordinatorLayout.LayoutParams lp =
+                (CoordinatorLayout.LayoutParams) fam.getLayoutParams();
+
+        if (lp.getAnchorId() != appBarLayout.getId()) {
+            // The anchor ID doesn't match the dependency, so we won't automatically
+            // show/hide the FAB
+            return false;
+        }
 
         if (mToolbarHeight == -1) {
             mToolbarHeight = Util.getToolbarHeight(fam.getContext());
@@ -39,33 +89,25 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             float translationY;
-            if (dependency instanceof Snackbar.SnackbarLayout) {
-                translationY = Math.min(0, dependency.getTranslationY() - dependency.getHeight());
-                Log.i("1", "translationY:" + translationY);
+            int famBottomMargin = lp.bottomMargin;
+            int height;
+            if (!fam.isOpened()) {
+                height = fam.getChildAt(0).getHeight();
             } else {
-                CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fam
-                        .getLayoutParams();
-                int famBottomMargin = lp.bottomMargin;
-                int height;
-                if (!fam.isOpened()) {
-                    height = fam.getChildAt(0).getHeight();
-                } else {
-                    height = fam.getHeight();
-                }
-                int distanceToScroll = height + famBottomMargin;
-                float ratio = dependency.getY() / (float) mToolbarHeight;
-                translationY = -distanceToScroll * ratio;
+                height = fam.getHeight();
             }
+            int distanceToScroll = height + famBottomMargin;
+            float ratio = appBarLayout.getY() / (float) mToolbarHeight;
+            translationY = -distanceToScroll * ratio;
+
             fam.setTranslationY(translationY);
         }else{
-            if (dependency.getTop()<0.0)
+            if (appBarLayout.getTop()<0.0)
                 fam.hideMenuButton(true);
             else
                 fam.showMenuButton(true);
         }
 
-
         return true;
     }
-
 }
