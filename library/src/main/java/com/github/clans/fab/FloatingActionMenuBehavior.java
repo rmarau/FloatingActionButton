@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -37,7 +38,7 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
 
         float translationY;
         if (dependency instanceof Snackbar.SnackbarLayout) {
-            translationY = Math.min(0, dependency.getTranslationY() - dependency.getHeight());
+            translationY = Math.min(0, ViewCompat.getTranslationY(dependency) - dependency.getHeight());
         } else {
             CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fam
                     .getLayoutParams();
@@ -49,10 +50,10 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
                 height = fam.getHeight();
             }
             int distanceToScroll = height + famBottomMargin;
-            float ratio = (float) dependency.getY() / (float) mToolbarHeight;
+            float ratio = (float) ViewCompat.getY(dependency) / (float) mToolbarHeight;
             translationY = - distanceToScroll * ratio;
         }
-        fam.setTranslationY(translationY);
+        ViewCompat.setTranslationY(fam, translationY);
 
         return true;
     }
