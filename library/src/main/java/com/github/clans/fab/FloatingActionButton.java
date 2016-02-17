@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
+import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -39,6 +40,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.support.v4.view.ViewCompat;
 
+@CoordinatorLayout.DefaultBehavior(FloatingActionButtonBehavior.class)
 public class FloatingActionButton extends ImageButton {
 
     public static final int SIZE_NORMAL = 0;
