@@ -99,31 +99,32 @@
             android:clickable="true"
             app:menu_openDirection="down"
             android:elevation="4dp"
-            android:tag="com.github.clans.fab.FloatingActionMenu" >
+            android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!" >
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="com.github.clans.fab.FloatingActionButton"/>
+                android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="com.github.clans.fab.FloatingActionButton"/>
+                android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="com.github.clans.fab.FloatingActionButton"/>
+                android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!"/>
 
         </com.github.clans.fab.FloatingActionMenu>
 
         <com.github.clans.fab.FloatingActionMenu
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="60dp"
             android:layout_gravity="bottom"
             app:layout_anchor="@id/toolbar"
             app:layout_anchorGravity="bottom|left"
@@ -131,22 +132,22 @@
             android:clickable="true"
             app:menu_openDirection="down"
             android:elevation="4dp"
-            android:tag="com.github.clans.fab.FloatingActionMenu" >
+            android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!" >
 
             <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="com.github.clans.fab.FloatingActionButton"/>
+                android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="com.github.clans.fab.FloatingActionButton"/>
+                android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="com.github.clans.fab.FloatingActionButton"/>
+                android:tag="FloatingActionMenu - I'm unable to scroll up when aligned vertically with this menu!"/>
 
         </com.github.clans.fab.FloatingActionMenu>
         <!--android:layout_gravity="bottom" // seems to fix the menu under the tab -->
