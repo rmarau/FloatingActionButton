@@ -121,5 +121,35 @@
 
         </com.github.clans.fab.FloatingActionMenu>
 
+        <com.github.clans.fab.FloatingActionMenu
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_anchor="@id/toolbar"
+            app:layout_anchorGravity="bottom|left"
+            app:menu_icon="@drawable/ic_star"
+            android:clickable="true"
+            app:menu_openDirection="down"
+            android:elevation="4dp"
+            android:tag="com.github.clans.fab.FloatingActionMenu" >
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="com.github.clans.fab.FloatingActionButton"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="com.github.clans.fab.FloatingActionButton"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="com.github.clans.fab.FloatingActionButton"/>
+
+        </com.github.clans.fab.FloatingActionMenu>
+        <!--android:layout_gravity="bottom" // seems to fix the menu under the tab -->
+
 
 </android.support.design.widget.CoordinatorLayout>

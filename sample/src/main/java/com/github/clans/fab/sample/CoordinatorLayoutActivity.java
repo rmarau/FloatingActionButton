@@ -30,7 +30,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
         View.OnClickListener clickListener = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, R.string.lorem_ipsum, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(v, (String)(v.getTag()), Snackbar.LENGTH_SHORT).show();
             }
         };
         findViewById(R.id.faba).setOnClickListener(clickListener);
