@@ -77,7 +77,7 @@ public class FloatingActionButtonBehavior extends CoordinatorLayout.Behavior<Flo
         final CoordinatorLayout.LayoutParams lp =
                 (CoordinatorLayout.LayoutParams) fab.getLayoutParams();
 
-        if (lp.getAnchorId() != appBarLayout.getId()) {
+        if (lp.getAnchorId()!=-1 && lp.getAnchorId() != appBarLayout.getId()) {
             // The anchor ID doesn't match the dependency, so we won't automatically
             // show/hide the FAB
             return false;

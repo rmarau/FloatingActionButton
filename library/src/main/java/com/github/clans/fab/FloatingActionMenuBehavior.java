@@ -77,7 +77,7 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
         final CoordinatorLayout.LayoutParams lp =
                 (CoordinatorLayout.LayoutParams) fam.getLayoutParams();
 
-        if (lp.getAnchorId() != appBarLayout.getId()) {
+        if (lp.getAnchorId()!=-1 && lp.getAnchorId() != appBarLayout.getId()) {
             // The anchor ID doesn't match the dependency, so we won't automatically
             // show/hide the FAB
             return false;
