@@ -63,9 +63,9 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
             fam.setTranslationY(translationY);
         }else{
             if (snackbar.getTop()<0.0)
-                fam.hideMenuButton(true);
+                fam.hideMenu(false); //hideMenuButton(false);
             else
-                fam.showMenuButton(true);
+                fam.showMenu(false); //showMenuButton(false);
         }
 
         return true;
@@ -103,9 +103,9 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
             fam.setTranslationY(translationY);
         }else{
             if (appBarLayout.getTop()<0.0)
-                fam.hideMenuButton(true);
+                fam.hideMenu(false); //hideMenuButton(false);
             else
-                fam.showMenuButton(true);
+                fam.showMenu(false); //showMenuButton(false);
         }
 
         return true;
