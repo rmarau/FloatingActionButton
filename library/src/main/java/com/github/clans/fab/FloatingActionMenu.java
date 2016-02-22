@@ -772,6 +772,11 @@ public class FloatingActionMenu extends ViewGroup {
         mToggleListener = listener;
     }
 
+    public void setIcon(Drawable icon) {
+        mIcon = icon;
+        mImageToggle.setImageDrawable(mIcon);
+    }
+
     public void setIconAnimated(boolean animated) {
         mIconAnimated = animated;
     }
