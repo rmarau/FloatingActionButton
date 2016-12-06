@@ -202,11 +202,9 @@ public class FloatingActionMenu extends ViewGroup {
     private void initMenuButtonAnimations(TypedArray attr) {
         int showResId = attr.getResourceId(R.styleable.FloatingActionMenu_menu_fab_show_animation, R.anim.fab_scale_up);
         setMenuButtonShowAnimation(AnimationUtils.loadAnimation(getContext(), showResId));
-        mImageToggleShowAnimation = AnimationUtils.loadAnimation(getContext(), showResId);
 
         int hideResId = attr.getResourceId(R.styleable.FloatingActionMenu_menu_fab_hide_animation, R.anim.fab_scale_down);
         setMenuButtonHideAnimation(AnimationUtils.loadAnimation(getContext(), hideResId));
-        mImageToggleHideAnimation = AnimationUtils.loadAnimation(getContext(), hideResId);
     }
 
     private void initBackgroundDimAnimation() {
@@ -807,12 +805,12 @@ public class FloatingActionMenu extends ViewGroup {
     }
 
     public void setMenuButtonShowAnimation(Animation showAnimation) {
-        mMenuButtonShowAnimation = showAnimation;
+        mImageToggleShowAnimation = mMenuButtonShowAnimation = showAnimation;
         mMenuButton.setShowAnimation(showAnimation);
     }
 
     public void setMenuButtonHideAnimation(Animation hideAnimation) {
-        mMenuButtonHideAnimation = hideAnimation;
+        mImageToggleHideAnimation = mMenuButtonHideAnimation = hideAnimation;
         mMenuButton.setHideAnimation(hideAnimation);
     }
 
