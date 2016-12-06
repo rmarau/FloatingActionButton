@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -28,6 +29,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+@CoordinatorLayout.DefaultBehavior(FloatingActionMenuBehavior.class)
 public class FloatingActionMenu extends ViewGroup {
 
     private static final int ANIMATION_DURATION = 300;
