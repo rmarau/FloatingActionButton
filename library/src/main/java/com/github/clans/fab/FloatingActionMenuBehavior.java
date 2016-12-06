@@ -12,6 +12,7 @@ import android.view.View;
 public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<FloatingActionMenu> {
 
     private int mToolbarHeight = -1;
+    private final boolean USE_TRANSLATION=false;
 
     public FloatingActionMenuBehavior() {
         super();
@@ -46,9 +47,8 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
             return false;
         }
 
-        if (mToolbarHeight == -1) {
-            mToolbarHeight = Util.getToolbarHeight(fam.getContext());
-        }
+        if (mToolbarHeight == -1)
+            mToolbarHeight = Util.getToolbarHeight(parent.getContext());
 
         final CoordinatorLayout.LayoutParams lp =
                 (CoordinatorLayout.LayoutParams) fam.getLayoutParams();
@@ -83,11 +83,10 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
             return false;
         }
 
-        if (mToolbarHeight == -1) {
-            mToolbarHeight = Util.getToolbarHeight(fam.getContext());
-        }
+        if (mToolbarHeight == -1)
+            mToolbarHeight = Util.getToolbarHeight(parent.getContext());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (USE_TRANSLATION && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             float translationY;
             int famBottomMargin = lp.bottomMargin;
             int height;
@@ -102,7 +101,7 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior<Float
 
             fam.setTranslationY(translationY);
         }else{
-            if (appBarLayout.getTop()<0.0)
+            if (appBarLayout.getTop()<-mToolbarHeight*4/5)
                 fam.hideMenuButton(true);
             else
                 fam.showMenuButton(true);
